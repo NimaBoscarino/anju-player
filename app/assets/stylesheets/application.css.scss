@@ -1,0 +1,102 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+
+  background-image: image-url('peaches.jpg');
+
+}
+
+#logo {
+
+  height: 7em;
+  width: auto;
+
+}
+
+.container {
+
+  padding: 5em;
+  text-align: center;
+  margin-top: 4em;
+  border: solid white 8px;
+  border-radius: 10px;
+  background-color: rgba(214, 135, 155, 0.94);
+}
+
+#submit_button {
+
+  background-color: #18415a;
+  background-image: none;
+  border: none;
+  height: 2em;
+  border-radius: 4px;
+  margin: 10px;
+  color: white;
+
+
+}
+
+#submit_box {
+  color: black;
+  width: 500px;
+  text-align: center;
+  border: none;
+  height: 2em;
+  font-size: 15px;
+
+}
+
+#output_box {
+  padding: 1em;
+  margin: 1em;
+  visibility:hidden;
+}
+
+#submit_button:hover {
+
+  background-color: #367195;
+
+}
+
+#submit_button:active {
+
+  background-color: #6c97b1;
+  border: none;
+
+}
+
+#title {
+  color: white;
+  font-size: 4em;
+}
+
+#tagline {
+
+  color: white;
+  font-family: Raleway;
+  font-size: 1em;
+
+}
+
+#secret_div { /* The secret div is used to collect youtube IDs, which are then sent to the server when saving the playlist */
+
+  visibility: hidden;
+
+}

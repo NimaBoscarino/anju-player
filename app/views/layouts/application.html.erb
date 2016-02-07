@@ -1,14 +1,47 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-  <title>AnjuPlayer</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Anju Player</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 
-<%= yield %>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 
-</body>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="../js/jquery-1.12.0.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../css/style.css"/>
+    <script src="../js/scripts.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/png" href="../images/anju_logov1.png"/>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <div class="container" id="main box">
+    <%= image_tag "anju_logov1.png", id: "logo" %>
+    <h1 id=title>Anju Player</h1>
+    <h3 id="tagline">enter youtube links to add songs to your playlist!</h3>
+    <input id="submit_box" type="text" placeholder="e.g. https://www.youtube.com/watch?v=6mR8Z-gmK1g">
+    <button id="submit_button" type="button" onclick="addSong()">ADD!</button>
+
+    <div class=vidbox>
+      <iframe class="vid" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div id="playlist">
+      <table id="p_table">
+      </table>
+    </div>
+
+    <div id="secret_div">
+      <table id="secret_table">
+      </table>
+    </div>
+  </div>
+
 </html>
