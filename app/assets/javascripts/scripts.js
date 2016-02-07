@@ -1,29 +1,29 @@
 function addSong() {
 
-  var youtube_key = "AIzaSyC_rY-ddTXByzTrJcNhUA5bob3M1BKPaQU"
-
+  var youtube_key = "AIzaSyC_rY-ddTXByzTrJcNhUA5bob3M1BKPaQU" 
+  
   var vid = document.getElementById("submit_box").value;
   var button = document.getElementById("submit_button");
 
   if (vid === "") { // don't add accidental clicks
     return;
   }
-
+  
     document.getElementById("submit_box").value = "";
 
-
+  
   var vid_id = getParameterByName("v", vid);
-
+  
   var youtube_url = "https://www.googleapis.com/youtube/v3/videos?part=id%2Csnippet&id=" + vid_id + "&key=" + youtube_key;
-
-  //var url = "http://localhost:7821/song";
-  //var url = "http://www.google.com";
-
+  
+  //var url = "http://localhost:7821/song"; 
+  //var url = "http://www.google.com"; 
+  
   var youtube_head = "https://www.youtube.com/embed/"
   var youtube_tail = "?autoplay=1&showinfo=0"
-
+  
   var url = youtube_head + vid_id + youtube_tail;
-
+    
   $( "iframe" ).attr("src", url);
 
   jQuery.ajax({
@@ -34,13 +34,13 @@ function addSong() {
       $( "#secret_table" ).append( "<tr><td>" + vid_id + "</tr></td>" );
     }
   });
-
+  
   /*
   var message = {
     "video":vid,
     "title":youtube_response
   }
-
+  
   var message_json = JSON.stringify(message);
   /*
   jQuery.ajax({
