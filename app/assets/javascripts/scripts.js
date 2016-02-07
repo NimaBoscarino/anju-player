@@ -28,22 +28,6 @@ function addSong() {
     }
   });
 
-  /*
-  var message = {
-    "video":vid,
-    "title":youtube_response
-  }
-
-  var message_json = JSON.stringify(message);
-  /*
-  jQuery.ajax({
-    type: "POST",
-    url: url,
-    data: message_json,
-    dataType:"json",
-  });
-  */
-
   //playSong(vid_id);
 
 }

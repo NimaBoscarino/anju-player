@@ -8,6 +8,7 @@
     <%= javascript_include_tag "jquery-1.12.0.js" %>
     <%= javascript_include_tag "bootstrap.min.js" %>
     <%= javascript_include_tag "scripts.js" %>
+    <%= javascript_include_tag "youtube_scripts.js" %>
 
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <%= favicon_link_tag 'anju_logov1.png' %>
@@ -16,26 +17,48 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <div class="container" id="main box">
-    <%= image_tag "anju_logov1.png", id: "logo" %>
-    <h1 id=title>Anju Player</h1>
-    <h3 id="tagline">enter youtube links to add songs to your playlist!</h3>
-    <input id="submit_box" type="text" placeholder="e.g. https://www.youtube.com/watch?v=6mR8Z-gmK1g">
-    <button id="submit_button" type="button" onclick="addSong()">ADD!</button>
+  <body>
 
-    <div class=vidbox>
-      <iframe class="vid" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+    <div class="container" id="main box">
+      <%= image_tag "anju_logov1.png", id: "logo" %>
+      <h1 id=title>Anju Player</h1>
+      <h3 id="tagline">enter youtube links to add songs to your playlist!</h3>
+      <input id="submit_box" type="text" placeholder="e.g. https://www.youtube.com/watch?v=6mR8Z-gmK1g">
+      <button id="submit_button" type="button" onclick="addSong()">ADD!</button>
+
+      <div class=vidbox>
+        <div id="player"></div>
+        <!--<iframe class="vid" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe> -->
+      </div>
+
+      <div id="playlist">
+        <table id="p_table">
+        </table>
+      </div>
+
+      <div id="secret_div">
+        <table id="secret_table">
+        </table>
+      </div>
     </div>
 
-    <div id="playlist">
-      <table id="p_table">
-      </table>
-    </div>
+    <script>
+      //from Youtube's iframe api website
 
-    <div id="secret_div">
-      <table id="secret_table">
-      </table>
-    </div>
-  </div>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      var done = false;
+
+    </script>
+
+</body>
 
 </html>
