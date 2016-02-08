@@ -5,6 +5,18 @@ function onYouTubeIframeAPIReady() {
     width: '100%',
     videoId: '',
     events: {
+      'onStateChange': onPlayerStateChange
     }
   });
+}
+
+function onPlayerStateChange(event) {
+
+  if (event.data == 0) {
+
+    //testFunction();
+    playNextSong();
+
+  }
+
 }

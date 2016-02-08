@@ -40,7 +40,7 @@ body {
   background-color: rgba(214, 135, 155, 0.94);
 }
 
-#submit_button {
+.anju_button {
 
   background-color: #18415a;
   background-image: none;
@@ -69,7 +69,7 @@ body {
   visibility:hidden;
 }
 
-#submit_button:hover {
+.anju_button:hover {
 
   background-color: #367195;
 
@@ -97,6 +97,14 @@ body {
 
 }
 
+#playlist_title {
+
+  color: white;
+  font-family: Raleway;
+  font-size: 2em;
+
+}
+
 #secret_div { /* The secret div is used to collect youtube IDs, which are then sent to the server when saving the playlist */
 
   display:none;
@@ -112,14 +120,43 @@ body {
 #playlist {
 
   float: left;
-  
+  border: solid white 4px;
+  border-radius: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 35em;
+  margin-top: 20px;
+  display: none;
+}
+
+#p_table {
+
+  text-align:center;
+  vertical-align:middle;
+  margin: 0 auto;
+}
+
+.song_select {
+
+  border:none;
+  background-image: none;
+  background-color: white;
+  margin: 3px;
+
 }
 
 #vidbox {
 
-  float: right;
   height: 30em;
   width: 30em;
   display:none;
+
+}
+
+#play_all {
+
+  display: inline-block;
 
 }

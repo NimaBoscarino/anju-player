@@ -28,6 +28,8 @@ function addSong() {
     }
   });
 
+  document.getElementById("playlist").style.display = "inline-block"
+
 }
 
 function getParameterByName(name, url) {
@@ -42,8 +44,26 @@ function getParameterByName(name, url) {
 
 function playSong(vid_id) {
 
-  document.getElementById("vidbox").style.display = "block";
+  document.getElementById("vidbox").style.display = "inline-block";
 
   player.loadVideoById(vid_id);
+
+}
+
+function playNextSong() {
+  current_song = current_song + 1;
+  vid_id = document.getElementById("secret_table").rows[current_song].cells[0].innerHTML;
+  playSong(vid_id);
+}
+
+function playAll() {
+
+}
+
+function testFunction() {
+
+  var tester = document.getElementById("debug_box");
+  current_song = current_song + 1;
+  tester.innerHTML = document.getElementById("secret_table").rows[current_song].cells[0].innerHTML;
 
 }
