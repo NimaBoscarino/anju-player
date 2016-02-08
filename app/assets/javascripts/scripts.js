@@ -23,7 +23,8 @@ function addSong() {
     type: "GET",
     url: youtube_url,
     success : function(data) {
-      $( "#p_table" ).append( "<tr><td><button class=song_select type=button onclick=playSong('" + vid_id + "')>" + data.items[0].snippet.title + "</button></tr></td>" );
+      var rowCount = $('#p_table tr').length;
+      $( "#p_table" ).append( "<tr><td><button class=song_select type=button onclick=playSong('" + rowCount + "')>" + data.items[0].snippet.title + "</button></tr></td>" );
       $( "#secret_table" ).append( "<tr><td>" + vid_id + "</tr></td>" );
     }
   });
@@ -42,18 +43,13 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function playSong(vid_id) {
+function playSong(song_index) {
 
+  current_song = song_index;
   document.getElementById("vidbox").style.display = "inline-block";
-
+  var vid_id = document.getElementById("secret_table").rows[song_index].cells[0].innerHTML;
   player.loadVideoById(vid_id);
 
-}
-
-function playNextSong() {
-  current_song = current_song + 1;
-  vid_id = document.getElementById("secret_table").rows[current_song].cells[0].innerHTML;
-  playSong(vid_id);
 }
 
 function playAll() {
@@ -63,7 +59,6 @@ function playAll() {
 function testFunction() {
 
   var tester = document.getElementById("debug_box");
-  current_song = current_song + 1;
-  tester.innerHTML = document.getElementById("secret_table").rows[current_song].cells[0].innerHTML;
+  tester.innerHTML = parseInt(current_song) + 1;
 
 }
