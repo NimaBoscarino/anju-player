@@ -83,6 +83,8 @@ body {
 }
 
 #title {
+
+  font-family: 'Sacramento', cursive;
   color: white;
   font-size: 4em;
 }
@@ -97,6 +99,27 @@ body {
 
 #secret_div { /* The secret div is used to collect youtube IDs, which are then sent to the server when saving the playlist */
 
-  visibility: hidden;
+  display:none;
+
+}
+
+#action_box {
+
+  margin-top: 25px;
+
+}
+
+#playlist {
+
+  float: left;
+  
+}
+
+#vidbox {
+
+  float: right;
+  height: 30em;
+  width: 30em;
+  display:none;
 
 }

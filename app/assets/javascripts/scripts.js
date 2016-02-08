@@ -28,8 +28,6 @@ function addSong() {
     }
   });
 
-  //playSong(vid_id);
-
 }
 
 function getParameterByName(name, url) {
@@ -44,11 +42,8 @@ function getParameterByName(name, url) {
 
 function playSong(vid_id) {
 
-  var youtube_head = "https://www.youtube.com/embed/"
-  var youtube_tail = "?autoplay=1&showinfo=0"
+  document.getElementById("vidbox").style.display = "block";
 
-  var url = youtube_head + vid_id + youtube_tail;
-
-  $( "iframe" ).attr("src", url);
+  player.loadVideoById(vid_id);
 
 }
