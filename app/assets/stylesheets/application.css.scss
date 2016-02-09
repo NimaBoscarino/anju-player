@@ -34,9 +34,12 @@ body {
 
   padding: 5em;
   text-align: center;
-  margin-top: 4em;
+  margin-top: 0;
   border: solid white 8px;
+  border-top: none;
   border-radius: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   background-color: rgba(214, 135, 155, 0.94);
 }
 
@@ -59,16 +62,12 @@ body {
   width: 500px;
   text-align: center;
   border: none;
+  border-radius: 6px;
   height: 2em;
   font-size: 15px;
 
 }
 
-#output_box {
-  padding: 1em;
-  margin: 1em;
-  visibility:hidden;
-}
 
 .anju_button:hover {
 
@@ -106,15 +105,18 @@ body {
 
 }
 
-#secret_div { /* The secret div is used to collect youtube IDs, which are then sent to the server when saving the playlist */
+#info {
 
-  display:none;
+  color: white;
 
 }
 
-#action_box {
 
-  margin-top: 25px;
+#action_part {
+
+  margin-top: 10px;
+  display: none;
+  text-align: center;
 
 }
 
@@ -128,8 +130,8 @@ body {
   padding-top: 15px;
   padding-bottom: 15px;
   width: 35em;
-  margin-top: 20px;
-  //display: none;
+  margin-right: 10px;
+
 }
 
 #p_table {
@@ -158,9 +160,10 @@ body {
 
 #vidbox {
 
-  height: 30em;
-  width: 30em;
-  display:none;
+  float: right;
+  height: 25em;
+  width: 25em;
+  margin-left: 10px;
 
 }
 

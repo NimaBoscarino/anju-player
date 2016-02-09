@@ -9,6 +9,7 @@ var youtube_head = "https://www.googleapis.com/youtube/v3/videos?part=id%2Csnipp
 var playlist = {};
 playlist.name = "";
 playlist.queue = [];
+var current_index;
 
 function song(title, id) {
   this.title = title;
@@ -34,6 +35,37 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 var done = false;
 
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '100%',
+    width: '100%',
+    videoId: '',
+    events: {
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+
+//Autoplay next song
+function onPlayerStateChange(event) {
+  if (event.data == 0) {
+    if (current_index + 1 === playlist.queue.length ) {
+      current_index = 0;
+      var vid_id = playlist.queue[current_index].id;
+      player.loadVideoById(vid_id);
+    } else {
+
+      current_index = current_index + 1;
+      var vid_id = playlist.queue[current_index].id;
+      player.loadVideoById(vid_id);
+
+    }
+  }
+}
+
+
+////////////////////////
 
 
 $( document ).ready(function() {
@@ -44,6 +76,14 @@ $( document ).ready(function() {
     var vid_id = getParameterByName("v", input_URL);
     var youtube_url = youtube_head + vid_id + "&key=" + youtube_key;
     getVidTitle(youtube_url, vid_id);
+    $("#action_part").css("display", "inline-block");
+  });
+
+  //clicking play all
+  $(document).on('click', '#play_all', function() {
+    current_index = 0;
+    var vid_id = playlist.queue[current_index].id;
+    player.loadVideoById(vid_id);
   });
 
   //deleting a song
@@ -72,8 +112,10 @@ $( document ).ready(function() {
   });
 
   //click a song to play it
-  $(document).on('click', '#song', function() {
-    alert(event.target);
+  $(document).on('click', '.song', function() {
+    current_index = $(event.target).parent().index();
+    var vid_id = playlist.queue[current_index].id;
+    player.loadVideoById(vid_id);
   });
 
 });
@@ -113,6 +155,6 @@ function redrawTable() {
   var move_down_button = "<button id=down class=anju_button type=button>DOWN</button>";
 
   $.each(playlist.queue, function(index, value) {
-    $("#p_table").append("<tr><td id=song>" + value.title + "</td><td>" + move_up_button + move_down_button + delete_button + "</td></tr>");
+    $("#p_table").append("<tr><td class=song>" + value.title + "</td><td>" + move_up_button + move_down_button + delete_button + "</td></tr>");
   });
 }
