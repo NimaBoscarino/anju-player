@@ -67,6 +67,7 @@ function onPlayerStateChange(event) {
       break;
     case 1:
       playing = true;
+      highlightCurrent();
       break;
     case 2:
       playing = false;
@@ -174,6 +175,7 @@ function redrawTable() {
     $("#p_table").append("<tr><td class=song>" + value.title + "</td><td>" + move_up_button + move_down_button + delete_button + "</td></tr>");
   });
 
+
   //I'll move this to it's own function later
   //It just sets the thumbnail of the video to be the first video
   //ONLY IF NO VIDEO IS CURRENTLY PLAYING
@@ -182,4 +184,17 @@ function redrawTable() {
     var vid_id = playlist.queue[current_index].id;
     player.cueVideoById(vid_id);
   }
+  if(playing) {
+    highlightCurrent();
+  }
+}
+
+function highlightCurrent() {
+  //highlight video currently playing
+  $.each( $(".song"), function(index, value) {
+    $(this).css("color", "white");
+    if (index == current_index) {
+      $(this).css("color", "#A0681D");
+    }
+  });
 }
