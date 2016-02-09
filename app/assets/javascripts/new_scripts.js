@@ -70,6 +70,8 @@ function onPlayerStateChange(event) {
 
 $( document ).ready(function() {
 
+  $("#action_part").hide(); // because this part should slide down or up later
+
   //When adding a song
   $( "#add" ).click(function() {
     var input_URL = $('#input_box').val();
@@ -143,16 +145,13 @@ function getVidTitle(youtube_url, vid_id) { //this also inserts into array and c
       playlist.queue.push(new_song);
       redrawTable();
       $("#action_part").slideDown();
-      $("#action_part").css("display", "inline-block");
-      if (playlist.queue.length == 1) {
-        player.cueVideoById(vid_id);
-        current_index = 0;
-      }
     }
   });
 }
 
 function redrawTable() {
+
+  if (playlist.queue.length == 0) { $("#action_part").slideUp(); return;}
 
   $("#p_table").empty(); //clear everything, then redraw. Not my proudest bit of code.
 
@@ -163,4 +162,11 @@ function redrawTable() {
   $.each(playlist.queue, function(index, value) {
     $("#p_table").append("<tr><td class=song>" + value.title + "</td><td>" + move_up_button + move_down_button + delete_button + "</td></tr>");
   });
+
+  //I'll move this to it's own function later
+  //It just sets the thumbnail of the video to be the first video
+  current_index = 0;
+  var vid_id = playlist.queue[current_index].id;
+  player.cueVideoById(vid_id);
+
 }
