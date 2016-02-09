@@ -10,6 +10,7 @@ var playlist = {};
 playlist.name = "";
 playlist.queue = [];
 var current_index;
+var playing ;
 
 function song(title, id) {
   this.title = title;
@@ -49,18 +50,28 @@ function onYouTubeIframeAPIReady() {
 
 //Autoplay next song
 function onPlayerStateChange(event) {
-  if (event.data == 0) {
-    if (current_index + 1 === playlist.queue.length ) {
-      current_index = 0;
-      var vid_id = playlist.queue[current_index].id;
-      player.loadVideoById(vid_id);
-    } else {
 
-      current_index = current_index + 1;
-      var vid_id = playlist.queue[current_index].id;
-      player.loadVideoById(vid_id);
+  switch(event.data) {
+    case 0:
+      if (current_index + 1 === playlist.queue.length ) {
+        current_index = 0;
+        var vid_id = playlist.queue[current_index].id;
+        player.loadVideoById(vid_id);
+      } else {
 
-    }
+        current_index = current_index + 1;
+        var vid_id = playlist.queue[current_index].id;
+        player.loadVideoById(vid_id);
+
+      }
+      break;
+    case 1:
+      playing = true;
+      break;
+    case 2:
+      playing = false;
+      break;
+
   }
 }
 
@@ -165,8 +176,10 @@ function redrawTable() {
 
   //I'll move this to it's own function later
   //It just sets the thumbnail of the video to be the first video
-  current_index = 0;
-  var vid_id = playlist.queue[current_index].id;
-  player.cueVideoById(vid_id);
-
+  //ONLY IF NO VIDEO IS CURRENTLY PLAYING
+  if (!playing) {
+    current_index = 0;
+    var vid_id = playlist.queue[current_index].id;
+    player.cueVideoById(vid_id);
+  }
 }
