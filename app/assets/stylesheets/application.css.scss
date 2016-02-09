@@ -115,7 +115,7 @@ body {
 #action_part {
 
   margin-top: 10px;
-  display: none;
+  display: none;;
   text-align: center;
 
 }
@@ -173,4 +173,16 @@ body {
 
 #song_title {
   text-align: left;
+}
+
+.song {
+
+  color: white;
+
+}
+
+.song:hover {
+
+  cursor: pointer;
+
 }

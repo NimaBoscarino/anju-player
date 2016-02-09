@@ -75,8 +75,8 @@ $( document ).ready(function() {
     var input_URL = $('#input_box').val();
     var vid_id = getParameterByName("v", input_URL);
     var youtube_url = youtube_head + vid_id + "&key=" + youtube_key;
+    $('#input_box').val("");
     getVidTitle(youtube_url, vid_id);
-    $("#action_part").css("display", "inline-block");
   });
 
   //clicking play all
@@ -142,6 +142,12 @@ function getVidTitle(youtube_url, vid_id) { //this also inserts into array and c
       var new_song = new song(vid_title, vid_id);
       playlist.queue.push(new_song);
       redrawTable();
+      $("#action_part").slideDown();
+      $("#action_part").css("display", "inline-block");
+      if (playlist.queue.length == 1) {
+        player.cueVideoById(vid_id);
+        current_index = 0;
+      }
     }
   });
 }
