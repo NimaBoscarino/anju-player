@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Anju Player</title>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <%= javascript_include_tag "jquery-1.12.0.js" %>
+    <%= javascript_include_tag "bootstrap.min.js" %>
+    <%= javascript_include_tag "scripts.js" %>
+    <%= javascript_include_tag "youtube_scripts.js" %>
+
+    <link href='https://fonts.googleapis.com/css?family=Raleway|Sacramento' rel='stylesheet' type='text/css'>
+    <%= favicon_link_tag 'anju_logov1.png' %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <div class="container" id="main box">
+      <div id="header_part">
+        <%= image_tag "anju_logov1.png", id: "logo" %>
+        <h1 id=title>Anju Player</h1>
+        <h3 id="tagline">enter youtube links to add songs to your playlist!</h3>
+        <input id="submit_box" type="text" placeholder="e.g. https://www.youtube.com/watch?v=6mR8Z-gmK1g">
+        <button class="anju_button" id="submit_button" type="button" onclick="addSong()">ADD!</button>
+      </div>
+
+      <div id="action_part">
+        <p id="debug_box">THIS IS A DEBUG TOOL</p>
+
+        <div id="playlist">
+          <h2 id="playlist_title">Playlist</h2>
+          <button class="anju_button" id="play_all" type="button" onclick="playSong(0)">PLAY ALL</button>
+          <hr>
+          <table id="p_table">
+          </table>
+        </div>
+
+        <div id=vidbox>
+          <div id="player"></div>
+        </div>
+
+      </div>
+
+      <div id="secret_div">
+        <table id="secret_table">
+        </table>
+      </div>
+    </div>
+
+    <script>
+      //from Youtube's iframe api website
+
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      var done = false;
+      var current_song = 0;
+
+    </script>
+
+</body>
+
+</html>

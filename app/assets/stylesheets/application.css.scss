@@ -47,13 +47,14 @@ body {
   border: none;
   height: 2em;
   border-radius: 4px;
-  margin: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
   color: white;
 
 
 }
 
-#submit_box {
+#input_box {
   color: black;
   width: 500px;
   text-align: center;
@@ -128,7 +129,7 @@ body {
   padding-bottom: 15px;
   width: 35em;
   margin-top: 20px;
-  display: none;
+  //display: none;
 }
 
 #p_table {
@@ -136,6 +137,14 @@ body {
   text-align:center;
   vertical-align:middle;
   margin: 0 auto;
+  display: inline-block;
+  width: 90%
+}
+
+#p_table td{
+
+  width: 50%;
+
 }
 
 .song_select {
@@ -157,6 +166,8 @@ body {
 
 #play_all {
 
-  display: inline-block;
+}
 
+#song_title {
+  text-align: left;
 }

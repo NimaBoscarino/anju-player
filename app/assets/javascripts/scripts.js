@@ -1,6 +1,6 @@
 function addSong() {
 
-  var youtube_key = "AIzaSyC_rY-ddTXByzTrJcNhUA5bob3M1BKPaQU"
+  var youtube_key = "AIzaSyC_rY-ddTXByzTrJcNhUA5bob3M1BKPaQU";
 
   var vid = document.getElementById("submit_box").value;
   var button = document.getElementById("submit_button");
@@ -57,7 +57,7 @@ function deleteSong(song_index) {
   document.getElementById("p_table").deleteRow(song_index);
   document.getElementById("secret_table").deleteRow(song_index);
 
-  
+
 
   //now I need to iterate through the playlist table and update every playSong() pointer and deleteSong() pointer
   //I think the secret table should be fine
