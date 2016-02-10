@@ -89,11 +89,10 @@ $( document ).ready(function() {
 
   //When adding a song
   $(document).on('click', '.song_result', function() {
-    $("#input_box").val("");
     index = $(this).index();
-    var new_song = result_array[index];
-    playlist.queue.push(new_song);
+    playlist.queue.push(result_array[index]);
     redrawTable();
+    $("#input_box").val("");
     $("#youtube_search").slideUp();
     $("#action_part").slideDown();
   });
@@ -113,6 +112,8 @@ $( document ).ready(function() {
       playing = false;
     }
     playlist.queue.splice(delete_index, 1);
+    if (delete_index < current_index){current_index = current_index - 1;}
+
     redrawTable();
   });
 
@@ -149,9 +150,8 @@ $( document ).ready(function() {
   $("#input_box").keyup(function (){
     $("#youtube_search").slideDown();
     var search = $("#input_box").val();
-    var youtube_url = youtube_search_h + search + "&part=id&key=" + youtube_key;
+    var youtube_url = youtube_search_h + $("#input_box").val() + "&part=id&key=" + youtube_key;
     getVidSearch(youtube_url, search);
-    drawSearch();
   });
 
 
@@ -200,6 +200,7 @@ function getVidSearch(youtube_url, search) { //used for instant search
           success : function(data) {
             var song = {id:data.items[0].id, title:data.items[0].snippet.title, thumb:data.items[0].snippet.thumbnails.default.url};
             result_array.push(song);
+            drawSearch();
           }
         });
       });
