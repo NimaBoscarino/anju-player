@@ -21,9 +21,15 @@
       <div id="header_part">
         <%= image_tag "anju_logov1.png", id: "logo" %>
         <h1 id=title>Anju Player</h1>
-        <h3 id="tagline">enter youtube links to add songs to your playlist!</h3>
-        <input id="input_box" type="text" placeholder="e.g. https://www.youtube.com/watch?v=6mR8Z-gmK1g">
-        <button class="anju_button" id="add" type="button">ADD!</button>
+        <h3 id="tagline">add songs to your playlist!</h3>
+        <!-- <input id="input_box" type="text" placeholder="e.g. https://www.youtube.com/watch?v=6mR8Z-gmK1g"> -->
+
+        <input id="input_box" type="text" placeholder="search youtube videos">
+      </div>
+
+      <div id=youtube_search>
+        <table id=result_table>
+        </table>
       </div>
 
       <div id="action_part">

@@ -3,14 +3,15 @@
 /**
   Important constants and variables
 **/
-
 var youtube_key = "AIzaSyC_rY-ddTXByzTrJcNhUA5bob3M1BKPaQU";
 var youtube_head = "https://www.googleapis.com/youtube/v3/videos?part=id%2Csnippet&id=";
+var youtube_search_h = "https://www.googleapis.com/youtube/v3/search?type=video&order=viewCount&q=";
 var playlist = {};
 playlist.name = "";
 playlist.queue = [];
 var current_index;
-var playing ;
+var playing;
+var result_array = [];
 
 function song(title, id) {
   this.title = title;
@@ -83,14 +84,18 @@ function onPlayerStateChange(event) {
 $( document ).ready(function() {
 
   $("#action_part").hide(); // because this part should slide down or up later
+  $("#youtube_search").hide();
+
 
   //When adding a song
-  $( "#add" ).click(function() {
-    var input_URL = $('#input_box').val();
-    var vid_id = getParameterByName("v", input_URL);
-    var youtube_url = youtube_head + vid_id + "&key=" + youtube_key;
-    $('#input_box').val("");
-    getVidTitle(youtube_url, vid_id);
+  $(document).on('click', '.song_result', function() {
+    $("#input_box").val("");
+    index = $(this).index();
+    var new_song = result_array[index];
+    playlist.queue.push(new_song);
+    redrawTable();
+    $("#youtube_search").slideUp();
+    $("#action_part").slideDown();
   });
 
   //clicking play all
@@ -140,6 +145,16 @@ $( document ).ready(function() {
     player.loadVideoById(vid_id);
   });
 
+  //search for songs
+  $("#input_box").keyup(function (){
+    $("#youtube_search").slideDown();
+    var search = $("#input_box").val();
+    var youtube_url = youtube_search_h + search + "&part=id&key=" + youtube_key;
+    getVidSearch(youtube_url, search);
+    drawSearch();
+  });
+
+
 });
 
 //from stack exchange lol
@@ -165,6 +180,29 @@ function getVidTitle(youtube_url, vid_id) { //this also inserts into array and c
       playlist.queue.push(new_song);
       redrawTable();
       $("#action_part").slideDown();
+    }
+  });
+}
+
+function getVidSearch(youtube_url, search) { //used for instant search
+  $.ajax({
+    type: "GET",
+    url: youtube_url,
+    dataType: "json",
+    success : function(data) {
+      result_array.length = 0;
+      $.each(data.items, function(index, value) {
+        var title_url = youtube_head + value.id.videoId + "&key=" + youtube_key;
+        $.ajax({
+          type: "GET",
+          url: title_url,
+          dataType: "json",
+          success : function(data) {
+            var song = {id:data.items[0].id, title:data.items[0].snippet.title, thumb:data.items[0].snippet.thumbnails.default.url};
+            result_array.push(song);
+          }
+        });
+      });
     }
   });
 }
@@ -204,5 +242,12 @@ function highlightCurrent() {
     if (index == current_index) {
       $(this).css("color", "#A0681D");
     }
+  });
+}
+
+function drawSearch() {
+  $("#result_table").empty();
+  $.each(result_array, function(index, value) {
+    $("#result_table").append("<tr class=song_result><td>" + value.title + "</td><td><img src=" + value.thumb + "></td></tr>");
   });
 }
