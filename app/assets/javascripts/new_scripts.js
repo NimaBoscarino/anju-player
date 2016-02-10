@@ -103,25 +103,33 @@ $( document ).ready(function() {
   //deleting a song
   $(document).on('click', '#delete', function() {
     var delete_index = $(event.target).parent().parent().index();
+    if ((delete_index == current_index) && (playing)) {
+      player.stopVideo();
+      playing = false;
+    }
     playlist.queue.splice(delete_index, 1);
     redrawTable();
   });
 
   //move a song up
   $(document).on('click', '#up', function() {
-    var current_index = $(event.target).parent().parent().index();
-    if (current_index == 0){return;} //check if at top already
-    var movingSong = playlist.queue.splice(current_index, 1);
-    playlist.queue.splice(current_index - 1, 0, movingSong[0]);
+    var selected_index = $(event.target).parent().parent().index();
+    if (selected_index == 0){return;} //check if at top already
+    if (selected_index == current_index) {current_index = current_index - 1;}
+    else if (selected_index == current_index + 1){current_index = current_index + 1;}
+    var movingSong = playlist.queue.splice(selected_index, 1);
+    playlist.queue.splice(selected_index - 1, 0, movingSong[0]);
     redrawTable();
   });
 
   //move a song down
   $(document).on('click', '#down', function() {
-    var current_index = $(event.target).parent().parent().index();
-    if (current_index == (playlist.queue.length - 1)){return;} //check if at pottom
-    var movingSong = playlist.queue.splice(current_index, 1);
-    playlist.queue.splice(current_index + 1, 0, movingSong[0]);
+    var selected_index = $(event.target).parent().parent().index();
+    if (selected_index == (playlist.queue.length - 1)){return;} //check if at pottom
+    if (selected_index == current_index) {current_index = current_index + 1;}
+    else if (selected_index == current_index - 1){current_index = current_index - 1;}
+    var movingSong = playlist.queue.splice(selected_index, 1);
+    playlist.queue.splice(selected_index + 1, 0, movingSong[0]);
     redrawTable();
   });
 
